@@ -225,6 +225,24 @@
     [tracker send:[builder build]];
 }
 
+// https://developers.google.com/analytics/devguides/collection/ios/v3/campaigns
+-(void)trackCampaignUrl:(id)args
+{
+
+    ENSURE_UI_THREAD_1_ARG(args);
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+
+    NSString *campaignUrl;
+
+    ENSURE_ARG_FOR_KEY(campaignUrl, args, @"campaignUrl", NSString);
+
+    GAIDictionaryBuilder *builder = [[GAIDictionaryBuilder alloc] init];
+    [builder setCampaignParametersFromUrl:campaignUrl];
+
+    [self handleCustomFields:builder jshash:args];
+    [tracker send:[builder build]];
+}
+
 -(void)trackException:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);

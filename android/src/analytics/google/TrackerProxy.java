@@ -81,7 +81,7 @@ public class TrackerProxy extends KrollProxy
     tracker.send(hitBuilder.build());
   }
 
-  // https://developers.google.com/analytics/devguides/collection/ios/v3/events
+  // https://developers.google.com/analytics/devguides/collection/android/v4/events
   @Kroll.method
   public void trackEvent(HashMap props)
   {

@@ -375,6 +375,48 @@ public class TrackerProxy extends KrollProxy
 
     tracker.send(hitBuilder.build());
   }
+  
+ //https://developers.google.com/analytics/devguides/collection/android/v4/campaigns
+ @Kroll.method
+ public void trackCampaignUrl(HashMap props) {
+   KrollDict propsDict = new KrollDict(props);
+
+   String campaignUrl = TiConvert.toString(propsDict, "campaignUrl");
+   
+   HitBuilders.ScreenViewBuilder hitBuilder = new HitBuilders.ScreenViewBuilder()
+   		.setCampaignParamsFromUrl(campaignUrl);
+   
+   // custom dimension
+   Object cd = propsDict.get("customDimension");
+   if (cd instanceof HashMap) {
+     HashMap dict = (HashMap) cd;
+     for (Object key : dict.keySet()) {
+       int idx = TiConvert.toInt(key);
+       String val = TiConvert.toString(dict.get(key));
+
+       if (idx > 0) {
+         hitBuilder.setCustomDimension(idx, val);
+       }
+     }
+   }
+
+   // custom metric
+   Object cm = propsDict.get("customMetric");
+   if (cm instanceof HashMap) {
+     HashMap dict = (HashMap) cm;
+
+     for (Object key : dict.keySet()) {
+       int idx = TiConvert.toInt(key);
+       float val = TiConvert.toFloat(dict.get(key));
+
+       if (idx > 0) {
+         hitBuilder.setCustomMetric(idx, val);
+       }
+     }
+   }
+
+   tracker.send(hitBuilder.build());
+ }
 
 
   @Kroll.method

@@ -252,6 +252,22 @@ tracker.trackTransactionItem({
 });
 ```
 
+### Tracker.trackCampaignUrl(params)
+
+Tracks traffic sources or marketing campaigns from the given url.
+
+| Property | Type | Description | Required |
+| -------- |:----:| ----------- |:--------:|
+| campaignUrl | String | The url that you wish to track | Yes |
+
+```javascript
+tracker.trackCampaignUrl({
+        campaignUrl: "http://examplepetstore.com/index.html?" +
+    "utm_source=email&utm_medium=email_marketing&utm_campaign=summer" +
+    "&utm_content=email_variation_1"
+});
+```
+
 ### Custom Dimensions and Metrics
 
 The above method parameters can be extended using customMetric and customDimention properties. For example:

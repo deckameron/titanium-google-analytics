@@ -82,6 +82,14 @@
 	return [[[AnalyticsGoogleTrackerProxy alloc] initWithTrackingId:trackingId] autorelease];
 }
 
+// Allow for manual dispatching of events when dispatchInterval is set to 0
+// https://developers.google.com/analytics/devguides/collection/ios/v3/dispatch#manual
+-(void)manualDispatch:(id)args
+{
+    ENSURE_UI_THREAD_0_ARGS;
+    [[GAI sharedInstance] dispatch];
+}
+
 -(id)defaultTracker
 {
     return [[AnalyticsGoogleTrackerProxy alloc] initWithDefault];

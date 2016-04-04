@@ -48,7 +48,7 @@ public class AnalyticsGoogleModule extends KrollModule
 	@Kroll.onAppCreate
 	public static void onAppCreate(TiApplication app)
 	{
-		 Log.d(LCAT, "inside onAppCreate");
+		Log.d(LCAT, "inside onAppCreate");
 		// put module init code that needs to run when the application is created
 	}
 
@@ -58,6 +58,12 @@ public class AnalyticsGoogleModule extends KrollModule
 	{
 		tracker = mInstance.newTracker(trackingID);
 		return new TrackerProxy(tracker);
+	}
+
+	// https://developers.google.com/analytics/devguides/collection/android/v4/dispatch#manual
+	@Kroll.method
+	public void manualDispatch() {
+		mInstance.dispatchLocalHits();
 	}
 
 	@Kroll.setProperty
@@ -94,5 +100,6 @@ public class AnalyticsGoogleModule extends KrollModule
 			Thread.setDefaultUncaughtExceptionHandler(reporter);
 		}
 	}
+
 
 }

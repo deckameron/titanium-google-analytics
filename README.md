@@ -20,6 +20,12 @@ If you find that you are experiencing errors related to Google Play Services, th
 
 If you have checked both and you are still experiencing errors, then you can try uninstalling your local Google Play library and re-installing it.
 
+## Google Play Services and Titanium Modules
+
+In the later half of 2015 or early 2016, Appcelerator developers decided to split the google play services jar into a `base` jar file and a jar file that includes the methods necessary for any particular module. In this module, we have `google-play-services-base.jar` and `google-play-services-analytics.jar`. This process was implemented because including all of google play services created an application that included too many method definitions; it was simply too big.
+
+This module currently relies on [Google Play Services API version 25 (7571000)](https://dl-ssl.google.com/android/repository/google_play_services_7571000_r25.zip). If you encounter an error that states the base jar does not match that of another module, then you must copy the `google-play-services-base.jar` from this module to all of the other modules that your app uses. At the time of writing, this module's base jar file might be newer than other modules as a requirement by the google analytics sdk.
+
 ## Usage
 
 To access this module from JavaScript, you need to do the following:
@@ -96,6 +102,14 @@ else if(Ti.Platform.name == 'iPhone OS') {
 }
 ```
 
+### Module.manualDispatch()
+
+If dispatch interval is set to zero, then no events will be sent automatically. In either case, you can dispatch events manually by using:
+
+```javascript
+	var GA = require("analytics.google");
+	GA.manualDispatch();
+```
 
 ### Module.getTracker(id)
 
@@ -267,7 +281,7 @@ Tracks traffic sources or marketing campaigns from the given url.
 
 ```javascript
 tracker.trackCampaignUrl({
-        campaignUrl: "http://examplepetstore.com/index.html?" +
+  campaignUrl: "http://examplepetstore.com/index.html?" +
     "utm_source=email&utm_medium=email_marketing&utm_campaign=summer" +
     "&utm_content=email_variation_1"
 });

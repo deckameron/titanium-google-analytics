@@ -243,6 +243,7 @@
     [tracker send:[builder build]];
 }
 
+// https://developers.google.com/analytics/devguides/collection/ios/v3/exceptions#caught
 -(void)trackException:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
@@ -258,13 +259,6 @@
 
     [tracker send:[[GAIDictionaryBuilder
         createExceptionWithDescription: description  withFatal: fatal] build]];
-}
-
-// Allow for manual dispatching of events when dispatchInterval is set to 0
--(void)dispatchAnalyticsEvents:(id)args
-{
-    ENSURE_UI_THREAD_0_ARGS;
-    [[GAI sharedInstance] dispatch];
 }
 
 -(id)trackingId

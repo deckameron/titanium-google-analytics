@@ -20,7 +20,7 @@ If you find that you are experiencing errors related to Google Play Services, th
 
 If you have checked both and you are still experiencing errors, then you can try uninstalling your local Google Play library and re-installing it.
 
-## Google Play Services and Titanium Modules
+## Google Play Services, Android, and Titanium Modules
 
 In the later half of 2015 or early 2016, Appcelerator developers decided to split the google play services jar into a `base` jar file and a jar file that includes the methods necessary for any particular module. In this module, we have `google-play-services-base.jar` and `google-play-services-analytics.jar`. This process was implemented because including all of google play services created an application that included too many method definitions; it was simply too big.
 

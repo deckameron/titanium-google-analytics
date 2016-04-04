@@ -260,6 +260,13 @@
         createExceptionWithDescription: description  withFatal: fatal] build]];
 }
 
+// Allow for manual dispatching of events when dispatchInterval is set to 0
+-(void)dispatchAnalyticsEvents:(id)args
+{
+    ENSURE_UI_THREAD_0_ARGS;
+    [[GAI sharedInstance] dispatch];
+}
+
 -(id)trackingId
 {
     return trackingId;

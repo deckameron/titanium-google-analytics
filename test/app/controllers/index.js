@@ -17,6 +17,7 @@ GA.dryRun = false;
 // dispatched on a separate thread to Google Analytics.
 // By default, data is dispatched from the Google Analytics SDK for Android every 30 minutes.
 GA.dispatchInterval = 15; // minutes
+GA.manualDispatch();
 
 Ti.API.info("USING TRACKING ID: " + Alloy.CFG.trackingId)
 var tracker = GA.getTracker(Alloy.CFG.trackingId);
@@ -181,6 +182,13 @@ tracker.trackTransactionItem({
   customMetric: {
     "1": 68.3
   }
+});
+
+// Campaign url
+tracker.trackCampaignUrl({
+  campaignUrl: "http://examplepetstore.com/index.html?" +
+    "utm_source=email&utm_medium=email_marketing&utm_campaign=summer" +
+    "&utm_content=email_variation_1"
 });
 
 

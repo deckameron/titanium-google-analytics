@@ -26,6 +26,7 @@ public class TrackerProxy extends KrollProxy
   private static final String LCAT = "TrackerProxy";
 
   private final Tracker tracker;
+  private boolean anonymizeIPEnabled = false;
 
   // Constructor
   public TrackerProxy(Tracker t)
@@ -33,6 +34,20 @@ public class TrackerProxy extends KrollProxy
     super();
     tracker = t;
   }
+
+  // https://developers.google.com/analytics/devguides/collection/android/v4/advanced#anonymizeIp
+  @Kroll.getProperty
+  public boolean getAnonymizeIP()
+  {
+    return anonymizeIPEnabled;
+  }
+
+  @Kroll.setProperty
+  public void setAnonymizeIP(boolean enabled)
+	{
+    anonymizeIPEnabled = enabled;
+		tracker.setAnonymizeIp(enabled);
+	}
 
   // https://developers.google.com/analytics/devguides/collection/android/v4/user-id
   @Kroll.method

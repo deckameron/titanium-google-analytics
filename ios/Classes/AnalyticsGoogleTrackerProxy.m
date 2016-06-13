@@ -49,6 +49,17 @@
 
 #pragma mark Public APIs
 
+-(NSNumber*)anonymizeIP {
+    return [NSNumber numberWithBool:anonymizeIP];
+}
+
+-(void)setAnonymizeIP:(id)value
+{
+    ENSURE_TYPE(value, NSNumber);
+    anonymizeIP = [TiUtils boolValue:value];
+    [tracker set:kGAIAnonymizeIp value:(anonymizeIP ? @"1" : @"0")];
+}
+
 // https://developers.google.com/analytics/devguides/collection/ios/v3/user-id
 -(void)setUser:(id)args
 {

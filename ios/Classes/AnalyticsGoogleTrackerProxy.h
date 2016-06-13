@@ -14,6 +14,7 @@
 @interface AnalyticsGoogleTrackerProxy : TiProxy {
     id<GAITracker> tracker;
     NSString *trackingId;
+    BOOL *anonymizeIP;
 }
 
 @property (nonatomic,readonly) id<GAITracker> tracker;
